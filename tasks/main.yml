@@ -16,7 +16,6 @@
     name: epel-release
     state: present
 
-
 - name: Install jmespath
   package:
     name: python-jmespath
