@@ -10,6 +10,23 @@
   tags:
     - base_goss
 
+- name: Install EPEL
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'
+  yum:
+    name: epel-release
+    state: present
+
+
+- name: Install jmespath
+  package:
+    name: python-jmespath
+  register: network_access
+  until: network_access is success
+  retries: 3
+  delay: 10
+  tags:
+    - base_goss
+
 - name: "get goss binary"
   become: no
   delegate_to: localhost
